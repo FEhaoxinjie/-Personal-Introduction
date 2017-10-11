@@ -41,51 +41,53 @@ let person = document.getElementById('person'),
     level_1 = scene.getElementsByClassName('level_1')[0],
     level_2 = scene.getElementsByClassName('level_2')[0],
     level_3 = scene.getElementsByClassName('level_3')[0],
-    level_3_ground=level_3.getElementsByClassName('level_3_ground')[0],
-    fireWorks=document.getElementById('fireWorks'),
-    endingText=document.getElementsByClassName('endingText')[0],
-    endingTextSpan=endingText.getElementsByTagName('span'),
+    level_3_ground = level_3.getElementsByClassName('level_3_ground')[0],
+    fireWorks = document.getElementById('fireWorks'),
+    endingText = document.getElementsByClassName('endingText')[0],
+    endingTextSpan = endingText.getElementsByTagName('span'),
     a = .5, v = 0,
     into_Level2 = false,
     leave_Level2 = true,
     abilityBox = document.getElementsByClassName('ability')[0],
     waterList = abilityBox.getElementsByClassName('water'),
     RootFs = parseFloat(document.documentElement.style.fontSize);
-    n = 0;
+n = 0;
 let loadingTimer, randomNum, readyBtn = document.getElementById('readyBtn');
 
 let gameBox = document.getElementById('gameBox');
-let config = {
-    vx: 4,	//小球x轴速度,正为右，负为左
-    vy: 4,	//小球y轴速度
-    height: 2,	//小球高宽，其实为正方形，所以不宜太大
-    width: 2,
-    count: 200,		//点个数
-    color: "121, 162, 185", 	//点颜色
-    stroke: "130,255,255", 		//线条颜色
-    dist: 6000, 	//点吸附距离
-    e_dist: 20000, 	//鼠标吸附加速距离
-    max_conn: 10 	//点到点最大连接数
-}
+// let config = {
+//     vx: 4,	//小球x轴速度,正为右，负为左
+//     vy: 4,	//小球y轴速度
+//     height: 2,	//小球高宽，其实为正方形，所以不宜太大
+//     width: 2,
+//     count: 200,		//点个数
+//     color: "121, 162, 185", 	//点颜色
+//     stroke: "130,255,255", 		//线条颜色
+//     dist: 6000, 	//点吸附距离
+//     e_dist: 20000, 	//鼠标吸附加速距离
+//     max_conn: 10 	//点到点最大连接数
+// }
+//
+// randomNum = Math.round(Math.random() * 1500 + 500);
+// loadingTimer = window.setTimeout(function () {
+//     // CanvasParticle(config);
+//     document.getElementById('loadingBg').style.opacity = 0;
+//     document.getElementsByClassName('particleBg')[0].style.opacity = 1;
+//     readyBtn.style.animationPlayState = 'running';
+//     window.clearTimeout(loadingTimer);
+// }, randomNum)
+// readyBtn.onclick = function () {
+//     document.getElementById('loadingBg').style.display = 'none';
+//     document.getElementsByClassName('particleBg')[0].style.display = 'none';
+//     startPage();
+// }
+startPage();
 
-randomNum = Math.round(Math.random() * 1500 + 500);
-loadingTimer = window.setTimeout(function () {
-    // CanvasParticle(config);
-    document.getElementById('loadingBg').style.opacity = 0;
-    document.getElementsByClassName('particleBg')[0].style.opacity = 1;
-    readyBtn.style.animationPlayState = 'running';
-    window.clearTimeout(loadingTimer);
-}, randomNum)
-readyBtn.onclick = function () {
-    document.getElementById('loadingBg').style.display = 'none';
-    document.getElementsByClassName('particleBg')[0].style.display = 'none';
-    startPage();
-}
 function startPage() {
     audio[0].play();
-       audio[0].volume=0.5;
-       audio[1].volume=0.3;
-       audio[2].volume=0.1;
+    audio[0].volume = 0.5;
+    audio[1].volume = 0.3;
+    audio[2].volume = 0.1;
 
     gameBox.style.display = 'block';
     gameBox.style.opacity = '1';
@@ -99,6 +101,7 @@ function startPage() {
                 imgBox.src = 'Images/person/Boy_Idle.gif';
                 window.clearTimeout(person.timer2);
                 bindKey();
+                controls();
             }, 1000)
             return;
         }
@@ -115,7 +118,7 @@ function bindKey() {
             level1Info();
             person.style.transform = 'rotateY(180deg)';
             audio[1].play();
-            if(parseFloat(scene.style.left)*RootFs/scene.offsetWidth>=0.6){
+            if (parseFloat(scene.style.left) * RootFs / scene.offsetWidth >= 0.6) {
 
                 return;
             }
@@ -124,7 +127,7 @@ function bindKey() {
             level1Info();
             person.style.transform = 'rotateY(0deg)';
             audio[1].play();
-            if(Math.abs(parseFloat(scene.style.left)*RootFs)/scene.offsetWidth>=0.6){
+            if (Math.abs(parseFloat(scene.style.left) * RootFs) / scene.offsetWidth >= 0.6) {
                 return;
             }
             personRun();
@@ -212,12 +215,12 @@ function intoLevel2() {
         level_2Width = level_2.offsetWidth;
     if ((sceneLeft + personW + 30 >= level_2Left) && (sceneLeft + personW - 50 < level_2Left + level_2Width)) {
         if (into_Level2 === true && (leave_Level2 === false)) {
-            fireWorks.style.top='100%';
-            endingTextSpan[0].style.animationPlayState='paused';
-            endingTextSpan[1].style.animationPlayState='paused';
-            person.style.filter='grayscale(0%)';
-            level_3_ground.style.filter='grayscale(0%)';
-            abilityBox.style.opacity=0;
+            fireWorks.style.top = '100%';
+            endingTextSpan[0].style.animationPlayState = 'paused';
+            endingTextSpan[1].style.animationPlayState = 'paused';
+            person.style.filter = 'grayscale(0%)';
+            level_3_ground.style.filter = 'grayscale(0%)';
+            abilityBox.style.opacity = 0;
             audio[2].pause();
             return;
         }
@@ -236,7 +239,7 @@ function intoLevel2() {
         imgList[1].style.display = 'none';
         imgList[2].style.display = 'block';
         personDown();
-        abilityWater();
+        if(sceneLeft + personW >= level_2Left + level_2Width){ abilityWater();}
         abilityBox.style.opacity = 1;
         into_Level2 = false;
         leave_Level2 = true;
@@ -376,14 +379,14 @@ function abilityWater() {
                                     addPopo(waterList[4], true);
                                     window.clearInterval(waterList[4].waterTimer);
 
-                                    fireWorks.fireworkTimer=window.setTimeout(function () {
-                                        fireWorks.style.top='0%';
-                                        endingTextSpan[0].style.animationPlayState='running';
-                                        endingTextSpan[1].style.animationPlayState='running';
-                                        person.style.filter='grayscale(100%)';
-                                        level_3_ground.style.filter='grayscale(100%)';
+                                    fireWorks.fireworkTimer = window.setTimeout(function () {
+                                        fireWorks.style.top = '0%';
+                                        endingTextSpan[0].style.animationPlayState = 'running';
+                                        endingTextSpan[1].style.animationPlayState = 'running';
+                                        person.style.filter = 'grayscale(100%)';
+                                        level_3_ground.style.filter = 'grayscale(100%)';
                                         audio[2].play();
-                                    },2000)
+                                    }, 2000)
 
                                 }
                             }, 10);
@@ -409,7 +412,7 @@ function addPopo(waterBox, move) {
         Popo.style.height = size + 'rem';
         Popo.style.position = 'absolute';
         Popo.style.left = Math.random() * (waterBoxW - size) + 'rem';
-        Popo.style.top = Math.random() * (100 - size/waterBoxH) + '%';
+        Popo.style.top = Math.random() * (100 - size / waterBoxH) + '%';
         Popo.style.border = '.01rem solid rgba(255,255,255,' + (Math.random() * 0.8 + 0.1) + ')';
         waterBox.appendChild(Popo);
     }
@@ -435,6 +438,57 @@ function popoMove(waterBox) {
             window.clearTimeout(PopoList[ranNum].moveTimer);
         }, (Math.random() * 90 + 10))
     }
+}
+
+function controls() {
+    let $controlsBox = $('.controlsBox'),
+        $left = $controlsBox.find('.left'),
+        $right = $controlsBox.find('.right'),
+        $stop = $controlsBox.find('.stop');
+    $left.on('tap', function () {
+        window.clearInterval($right[0].moveTimer);
+        if ($left[0].moveTimer !== undefined) return;
+        $left[0].moveTimer = window.setInterval(function () {
+            level1Info();
+            person.style.transform = 'rotateY(180deg)';
+            audio[1].play();
+            if (parseFloat(scene.style.left) * RootFs / scene.offsetWidth >= 0.6) {
+
+                return;
+            }
+            personRun();
+        },40)
+    })
+    $right.on('tap', function () {
+        window.clearInterval($left[0].moveTimer);
+        console.log($right[0].moveTimer);
+        if ($right[0].moveTimer !== undefined) {
+            console.log(2);
+            return;
+        }
+        $right[0].moveTimer = window.setInterval(function () {
+            level1Info();
+            person.style.transform = 'rotateY(0deg)';
+            audio[1].play();
+            if (Math.abs(parseFloat(scene.style.left) * RootFs) / scene.offsetWidth >= 0.6) {
+                return;
+            }
+            personRun();
+            scene.style.left = parseFloat(scene.style.left) - .2 + 'rem';
+        }, 40);
+    });
+
+    $stop.on('tap', function () {
+        window.clearInterval($left[0].moveTimer);
+        window.clearInterval($right[0].moveTimer);
+        $left[0].moveTimer = undefined;
+        $right[0].moveTimer = undefined;
+        audio[1].pause();
+        imgBox.src = 'Images/person/Boy_Idle.gif';
+        person.dataset.run = false;
+    })
+
+
 }
 
 

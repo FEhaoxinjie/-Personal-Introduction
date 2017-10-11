@@ -10,78 +10,6 @@ img {
     height: 100%;
 }
 
-.particleBg {
-    height: 100%;
-    background:  url(../Images/bg/bg2.png) 60% 0 no-repeat	rgba(0,0,0,.8);
-    -webkit-background-size: 170%;
-    background-size: 170%;
-    opacity: 0;
-    transition: all 1s;
-}
-
-.readyBtn {
-    width: 5rem;
-    height: 5rem;
-    border-radius: 50%;
-    background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
-    text-align: center;
-    line-height: 5rem;
-    animation: fontReadyChange .5s ease-in-out infinite alternate, btnMove 1s ease-out 1;
-    animation-play-state: paused;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-left: -2.5rem;
-    margin-top: -2.5rem;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    transition: all 2s;
-}
-
-.readyBtn > div {
-    width: 5.5rem;
-    height: 5.5rem;
-    position: absolute;
-    left: -.25rem;
-    top: -.25rem;
-    border: .02rem solid #e7f0fd;
-    border-radius: 50%;
-    box-sizing: border-box;
-    z-index: -1;
-}
-
-.readyBtn > div:nth-child(1) {
-    animation: borderChange 1s ease-in-out infinite alternate;
-}
-
-.readyBtn > div:nth-child(2) {
-    animation: borderChange 1s ease-in-out .2s infinite alternate;
-}
-
-.loadingBg {
-    width: 6rem;
-    height: 4rem;
-    margin-left: -3rem;
-    margin-top: -2rem;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    opacity: 1;
-    transition: all 1s;
-}
-
-.loadingBg > .loading {
-    width: 100%;
-    height: 12%;
-    position: absolute;
-    bottom: 0;
-    z-index: 1;
-    background: url(../Images/bg/loading.gif) 54% 88% no-repeat;
-}
-
 @keyframes fontReadyChange {
     0% {
         color: #8E8F94;
@@ -323,10 +251,135 @@ img {
     max-width: 640px;
 }
 
+.gameBox > .particleBg {
+    height: 100%;
+    background: url(../Images/bg/bg2.png) 60% 0 no-repeat rgba(0, 0, 0, .8);
+    -webkit-background-size: 170%;
+    background-size: 170%;
+    opacity: 0;
+    transition: all 1s;
+}
+
+.gameBox > .readyBtn {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
+    text-align: center;
+    line-height: 5rem;
+    animation: fontReadyChange .5s ease-in-out infinite alternate, btnMove 1s ease-out 1;
+    animation-play-state: paused;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -2.5rem;
+    margin-top: -2.5rem;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: all 2s;
+}
+
+.gameBox > .readyBtn > div {
+    width: 5.5rem;
+    height: 5.5rem;
+    position: absolute;
+    left: -.25rem;
+    top: -.25rem;
+    border: .02rem solid #e7f0fd;
+    border-radius: 50%;
+    box-sizing: border-box;
+    z-index: -1;
+}
+
+.gameBox > .readyBtn > div:nth-child(1) {
+    animation: borderChange 1s ease-in-out infinite alternate;
+}
+
+.gameBox > .readyBtn > div:nth-child(2) {
+    animation: borderChange 1s ease-in-out .2s infinite alternate;
+}
+
+.gameBox > .loadingBg {
+    width: 6rem;
+    height: 4rem;
+    margin-left: -3rem;
+    margin-top: -2rem;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    opacity: 1;
+    transition: all 1s;
+}
+
+.gameBox > .loadingBg > .loading {
+    width: 100%;
+    height: 12%;
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    background: url(../Images/bg/loading.gif) 54% 88% no-repeat;
+}
+
+/*控制器*/
+.gameBox > .controls {
+    position: fixed;
+    left: 3%;
+    bottom: 1%;
+    width: 2rem;
+    height: 2rem;
+    background-color: rgba(0, 0, 0, .2);
+    border-radius: 50%;
+    z-index: 999;
+}
+
+.gameBox > .controls > .controlsBox {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.gameBox > .controls > .controlsBox > i:nth-child(1) {
+    background: url(../Images/obstacle/left.png) 0 0 no-repeat;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+    position: absolute;
+    left: -7%;
+    top: 32%;
+    width: 30%;
+    height: 30%;
+}
+
+.gameBox > .controls > .controlsBox > i:nth-child(2) {
+    background: url(../Images/obstacle/right.png) 0 0 no-repeat;
+    -webkit-background-size: 85%;
+    background-size: 85%;
+    position: absolute;
+    right: -8%;
+    top: 34%;
+    width: 30%;
+    height: 30%;
+}
+
+.gameBox > .controls > .controlsBox > i:nth-child(3) {
+    background: url(../Images/obstacle/stop.png) 0 0 no-repeat;
+    -webkit-background-size: 85%;
+    background-size: 85%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -15%;
+    margin-top: -15%;
+    width: 30%;
+    height: 30%;
+}
+
 /*人物*/
 .gameBox .person {
     position: absolute;
-    z-index: 999;
+    z-index: 888;
     width: 2rem;
     height: 2.5rem;
     right: 0;
@@ -371,7 +424,6 @@ img {
 
 }
 
-
 .signCards2 {
     background: url(../Images/obstacle/Sign_2.png) 0 0 no-repeat;
     -webkit-background-size: 100%;
@@ -390,9 +442,8 @@ img {
     background-size: 100%;
 }
 
-
 /*level1 场景*/
-.gameBox .scene > .level_1{
+.gameBox .scene > .level_1 {
     width: 20%;
 }
 
@@ -791,7 +842,7 @@ img {
 
 /*level_3 ability*/
 
-.gameBox .scene .level_3    {
+.gameBox .scene .level_3 {
     width: 25%;
     position: relative;
 }
