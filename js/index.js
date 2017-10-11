@@ -1,44 +1,8 @@
-//    var box=document.getElementById('pikaqiu'),
-//            img=box.getElementsByTagName('img')[0];
-//    var n=1;
-//    var step=0,
-//    i=-1,
-//    angle=null;
-//    var timer=window.setInterval(function () {
-//        if(n>8){
-////            window.clearInterval(timer);
-////            if(Math.round(Math.random() + 1)==1){
-////                console.log(n);
-////                box.style.background='url("Images/pkaqiu/pikaqiu_'+n+'.png")'+' no-repeat';
-////            }
-//            img.src='Images/tree/tree_'+2+'.png';
-//            step+=(5*i)*2;
-//            n=3;
-//            return
-//        }
-//        img.src='Images/tree/tree_'+n+'.png';
-//        step+=5*i;
-//        if(Math.abs(step)>=100){
-//
-//            if(i===-1){
-//            img.style.transform='rotateY(180deg)';
-//
-//            }else {
-//                img.style.transform='rotateY(0deg)';
-//            }
-//            console.log(img.style.left);
-//            i*=-1;
-//
-//        }
-//        img.style.left=step+'px';
-//        n++;
-//    },100)
 let person = document.getElementById('person'),
     imgList = person.getElementsByTagName('img'),
     imgBox = imgList[0],
     audio = document.getElementsByTagName('audio'),
     scene = document.getElementById('scene'),
-    level_1 = scene.getElementsByClassName('level_1')[0],
     level_2 = scene.getElementsByClassName('level_2')[0],
     level_3 = scene.getElementsByClassName('level_3')[0],
     level_3_ground = level_3.getElementsByClassName('level_3_ground')[0],
