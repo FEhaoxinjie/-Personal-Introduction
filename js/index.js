@@ -443,7 +443,7 @@ function controls() {
                 return;
             }
             personRun();
-        },40)
+        },20)
     })
     $right.on('tap', function () {
         window.clearInterval($left[0].moveTimer);
@@ -461,7 +461,7 @@ function controls() {
             }
             personRun();
             scene.style.left = parseFloat(scene.style.left) - .2 + 'rem';
-        }, 40);
+        }, 20);
     });
 
     $stop.on('tap', function () {
