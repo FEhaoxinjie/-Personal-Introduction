@@ -55,33 +55,19 @@ n = 0;
 let loadingTimer, randomNum, readyBtn = document.getElementById('readyBtn');
 
 let gameBox = document.getElementById('gameBox');
-// let config = {
-//     vx: 4,	//小球x轴速度,正为右，负为左
-//     vy: 4,	//小球y轴速度
-//     height: 2,	//小球高宽，其实为正方形，所以不宜太大
-//     width: 2,
-//     count: 200,		//点个数
-//     color: "121, 162, 185", 	//点颜色
-//     stroke: "130,255,255", 		//线条颜色
-//     dist: 6000, 	//点吸附距离
-//     e_dist: 20000, 	//鼠标吸附加速距离
-//     max_conn: 10 	//点到点最大连接数
-// }
-//
-// randomNum = Math.round(Math.random() * 1500 + 500);
-// loadingTimer = window.setTimeout(function () {
-//     // CanvasParticle(config);
-//     document.getElementById('loadingBg').style.opacity = 0;
-//     document.getElementsByClassName('particleBg')[0].style.opacity = 1;
-//     readyBtn.style.animationPlayState = 'running';
-//     window.clearTimeout(loadingTimer);
-// }, randomNum)
-// readyBtn.onclick = function () {
-//     document.getElementById('loadingBg').style.display = 'none';
-//     document.getElementsByClassName('particleBg')[0].style.display = 'none';
-//     startPage();
-// }
-startPage();
+randomNum = Math.round(Math.random() * 1500 + 500);
+loadingTimer = window.setTimeout(function () {
+    // CanvasParticle(config);
+    document.getElementById('loadingBg').style.opacity = 0;
+    document.getElementsByClassName('particleBg')[0].style.opacity = 1;
+    readyBtn.style.animationPlayState = 'running';
+    window.clearTimeout(loadingTimer);
+}, randomNum)
+readyBtn.onclick = function () {
+    document.getElementById('loadingBg').style.display = 'none';
+    document.getElementsByClassName('particleBg')[0].style.display = 'none';
+    startPage();
+}
 
 function startPage() {
     audio[0].play();

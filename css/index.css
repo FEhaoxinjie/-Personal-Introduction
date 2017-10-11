@@ -239,19 +239,7 @@ img {
     }
 }
 
-.gameBox {
-    display: none;
-    opacity: 1;
-    width: 100%;
-    height: 100%;
-    transition: all 2s;
-    position: relative;
-    margin: 0 auto;
-    overflow: hidden;
-    max-width: 640px;
-}
-
-.gameBox > .particleBg {
+.particleBg {
     height: 100%;
     background: url(../Images/bg/bg2.png) 60% 0 no-repeat rgba(0, 0, 0, .8);
     -webkit-background-size: 170%;
@@ -260,7 +248,7 @@ img {
     transition: all 1s;
 }
 
-.gameBox > .readyBtn {
+.readyBtn {
     width: 5rem;
     height: 5rem;
     border-radius: 50%;
@@ -282,7 +270,7 @@ img {
     transition: all 2s;
 }
 
-.gameBox > .readyBtn > div {
+.readyBtn > div {
     width: 5.5rem;
     height: 5.5rem;
     position: absolute;
@@ -294,15 +282,15 @@ img {
     z-index: -1;
 }
 
-.gameBox > .readyBtn > div:nth-child(1) {
+.readyBtn > div:nth-child(1) {
     animation: borderChange 1s ease-in-out infinite alternate;
 }
 
-.gameBox > .readyBtn > div:nth-child(2) {
+.readyBtn > div:nth-child(2) {
     animation: borderChange 1s ease-in-out .2s infinite alternate;
 }
 
-.gameBox > .loadingBg {
+.loadingBg {
     width: 6rem;
     height: 4rem;
     margin-left: -3rem;
@@ -314,7 +302,7 @@ img {
     transition: all 1s;
 }
 
-.gameBox > .loadingBg > .loading {
+.loadingBg > .loading {
     width: 100%;
     height: 12%;
     position: absolute;
@@ -322,6 +310,20 @@ img {
     z-index: 1;
     background: url(../Images/bg/loading.gif) 54% 88% no-repeat;
 }
+
+.gameBox {
+    display: none;
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+    transition: all 2s;
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+    max-width: 640px;
+}
+
+
 
 /*控制器*/
 .gameBox > .controls {

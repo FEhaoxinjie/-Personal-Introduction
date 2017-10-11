@@ -11,14 +11,14 @@ let RENDERER = {
         this.render();
     },
     setParameters : function(){
-        this.jQuerycontainer = jQuery('#fireWorks');
-        this.width = this.jQuerycontainer.width();
-        this.height = this.jQuerycontainer.height();
+        this.$container = $('#fireWorks');
+        this.width = this.$container.width();
+        this.height = this.$container.height();
         console.log(this.width);
         console.log(this.height);
         this.distance = Math.sqrt(Math.pow(this.width / 2, 2) + Math.pow(this.height / 2, 2));
-        this.contextFireworks = jQuery('<canvas />').attr({width : this.width, height : this.height}).appendTo(this.jQuerycontainer).get(0).getContext('2d');
-        this.contextTwigs = jQuery('<canvas />').attr({width : this.width, height : this.height}).appendTo(this.jQuerycontainer).get(0).getContext('2d');
+        this.contextFireworks = $('<canvas />').attr({width : this.width, height : this.height}).appendTo(this.$container).get(0).getContext('2d');
+        this.contextTwigs = $('<canvas />').attr({width : this.width, height : this.height}).appendTo(this.$container).get(0).getContext('2d');
 
         this.stars = [];
         this.fireworks = [new FIREWORK(this.width, this.height, this)];
