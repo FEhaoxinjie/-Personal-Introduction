@@ -364,19 +364,6 @@ img {
     background-size: 100%;
 }
 
-.smallTree {
-    background: url(../Images/obstacle/Tree_1.png) no-repeat;
-    -webkit-background-size: 100%;
-    background-size: 100%;
-
-}
-
-.midTree {
-    background: url(../Images/obstacle/Tree_1.png) no-repeat;
-    -webkit-background-size: 100%;
-    background-size: 100%;
-}
-
 .bigTree {
     background: url(../Images/obstacle/Tree_2.png) no-repeat;
     -webkit-background-size: 100%;
@@ -384,29 +371,6 @@ img {
 
 }
 
-.Bush1 {
-    background: url(../Images/obstacle/Bush1.png) 0 0 no-repeat;
-    -webkit-background-size: 100%;
-    background-size: 100%;
-}
-
-.Bush2 {
-    background: url(../Images/obstacle/Bush2.png) 0 0 no-repeat;
-    -webkit-background-size: 100%;
-    background-size: 100%;
-}
-
-.Bush3 {
-    background: url(../Images/obstacle/Bush3.png) 0 0 no-repeat;
-    -webkit-background-size: 100%;
-    background-size: 100%;
-}
-
-.signCards1 {
-    background: url(../Images/obstacle/Sign_1.png) 0 0 no-repeat;
-    -webkit-background-size: 100%;
-    background-size: 100%;
-}
 
 .signCards2 {
     background: url(../Images/obstacle/Sign_2.png) 0 0 no-repeat;
@@ -426,38 +390,6 @@ img {
     background-size: 100%;
 }
 
-.Bush1 {
-    background: url(../Images/obstacle/Bush1.png) 0 0 no-repeat;
-    -webkit-background-size: 100%;
-    background-size: 100%;
-}
-
-.Bush2 {
-    background: url(../Images/obstacle/Bush2.png) 0 0 no-repeat;
-    -webkit-background-size: 100%;
-    background-size: 100%;
-}
-
-.Bush3 {
-    background: url(../Images/obstacle/Bush3.png) 0 0 no-repeat;
-    -webkit-background-size: 100%;
-    background-size: 100%;
-}
-
-.Bush4 {
-    background: url(../Images/obstacle/Bush4.png) 0 0 no-repeat;
-    -webkit-background-size: 100%;
-    background-size: 100%;
-}
-
-/*关卡吊牌*/
-.dialog {
-    position: fixed;
-    display: block;
-    background: url(../Images/obstacle/dialog.png) 0 0 no-repeat;
-    -webkit-background-size: 100%;
-    background-size: 100% 100%;
-}
 
 /*level1 场景*/
 .gameBox .scene > .level_1{
