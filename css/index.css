@@ -241,9 +241,7 @@ img {
 
 .particleBg {
     height: 100%;
-    background: url(../Images/bg/bg2.png) 60% 0 no-repeat rgba(0, 0, 0, .8);
-    -webkit-background-size: 170%;
-    background-size: 170%;
+    background-image: linear-gradient(to right, #434343 0%, black 100%);
     opacity: 0;
     transition: all 1s;
 }
@@ -279,7 +277,7 @@ img {
     border: .02rem solid #e7f0fd;
     border-radius: 50%;
     box-sizing: border-box;
-    z-index: -1;
+    z-index: 0;
 }
 
 .readyBtn > div:nth-child(1) {
