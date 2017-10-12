@@ -261,13 +261,13 @@ function level2Info() {
     } else {
         occlusion.style.transform = 'scale(1)';
         eatingDiv[1].style.transform = 'translate(0%,0%)';
-        eatingDiv[1].style.transform = 'translate(100%,0%) rotateY(-180deg)';
+        eatingDiv[2].style.transform = 'translate(100%,0%) rotateY(-180deg)';
         eatingBox.style.transform = 'scale(0)';
         sleepingDiv[1].style.transform = 'translate(0%,0%)';
-        sleepingDiv[1].style.transform = 'translate(100%,0%) rotateY(-180deg)';
+        sleepingDiv[2].style.transform = 'translate(100%,0%) rotateY(-180deg)';
         sleepingBox.style.transform = 'scale(0)';
         codingDiv[1].style.transform = 'translate(0%,0%)';
-        codingDiv[1].style.transform = 'translate(100%,0%) rotateY(-180deg)';
+        codingDiv[2].style.transform = 'translate(100%,0%) rotateY(-180deg)';
         codingBox.style.transform = 'scale(0)';
         sun.classList.remove('sunMove');
     }
