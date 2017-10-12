@@ -189,7 +189,9 @@ function intoLevel2() {
         imgList[1].style.display = 'none';
         imgList[2].style.display = 'block';
         personDown();
-        if(sceneLeft + personW >= level_2Left + level_2Width){ abilityWater();}
+        if (sceneLeft + personW >= level_2Left + level_2Width) {
+            abilityWater();
+        }
         abilityBox.style.opacity = 1;
         into_Level2 = false;
         leave_Level2 = true;
@@ -242,32 +244,30 @@ function level2Info() {
         occlusion = hobby.getElementsByClassName('occlusion')[0];
 
     if ((Math.abs(scene.offsetLeft) + 2 * RootFs >= level_2.offsetLeft + eating.offsetLeft) && (Math.abs(scene.offsetLeft) + 2 * RootFs < level_2.offsetLeft + sleeping.offsetLeft)) {
-        eatingDiv[1].style.left = '-50%';
-        eatingDiv[2].style.left = '100%';
+        eatingDiv[1].style.transform = 'translate(-100%,0%)';
+        eatingDiv[2].style.transform = 'translate(200%,0%) rotateY(-180deg)';
         eatingBox.style.transform = 'scale(1)';
         occlusion.style.transform = 'scale(0)';
     } else if ((Math.abs(scene.offsetLeft) + 2 * RootFs >= level_2.offsetLeft + sleeping.offsetLeft) && (Math.abs(scene.offsetLeft) + 2 * RootFs < level_2.offsetLeft + coding.offsetLeft)) {
-        occlusion.style.transform = 'scale(0)'
-        sleepingDiv[1].style.left = '-50%';
-        sleepingDiv[2].style.left = '100%';
+        sleepingDiv[1].style.transform = 'translate(-100%,0%)';
+        sleepingDiv[2].style.transform = 'translate(200%,0%) rotateY(-180deg)';
         sleepingBox.style.transform = 'scale(1)';
     } else if ((Math.abs(scene.offsetLeft) + 2 * RootFs >= level_2.offsetLeft + coding.offsetLeft) && (Math.abs(scene.offsetLeft) + 2 * RootFs < level_2.offsetLeft + coding.offsetLeft + codingBox.offsetWidth)) {
-        occlusion.style.transform = 'scale(0)'
-        codingDiv[1].style.left = '-50%';
-        codingDiv[2].style.left = '100%';
+        codingDiv[1].style.transform = 'translate(-100%,0%)';
+        codingDiv[2].style.transform = 'translate(200%,0%) rotateY(-180deg)';
         codingBox.style.transform = 'scale(1)';
         sun.classList.add('sunMove');
 
     } else {
         occlusion.style.transform = 'scale(1)';
-        eatingDiv[1].style.left = '0%';
-        eatingDiv[2].style.left = '50%';
+        eatingDiv[1].style.transform = 'translate(0%,0%)';
+        eatingDiv[1].style.transform = 'translate(100%,0%) rotateY(-180deg)';
         eatingBox.style.transform = 'scale(0)';
-        sleepingDiv[1].style.left = '0%';
-        sleepingDiv[2].style.left = '50%';
+        sleepingDiv[1].style.transform = 'translate(0%,0%)';
+        sleepingDiv[1].style.transform = 'translate(100%,0%) rotateY(-180deg)';
         sleepingBox.style.transform = 'scale(0)';
-        codingDiv[1].style.left = '0%';
-        codingDiv[2].style.left = '50%';
+        codingDiv[1].style.transform = 'translate(0%,0%)';
+        codingDiv[1].style.transform = 'translate(100%,0%) rotateY(-180deg)';
         codingBox.style.transform = 'scale(0)';
         sun.classList.remove('sunMove');
     }
@@ -407,7 +407,7 @@ function controls() {
                 return;
             }
             personRun();
-        },20)
+        }, 20)
     })
     $right.on('tap', function () {
         window.clearInterval($left[0].moveTimer);

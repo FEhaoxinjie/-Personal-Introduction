@@ -319,7 +319,7 @@ img {
     transition: all 2s;
     position: relative;
     margin: 0 auto;
-    overflow: hidden;
+    /*overflow: hidden;*/
     max-width: 640px;
 }
 
@@ -721,12 +721,11 @@ img {
 }
 
 .gameBox .scene .level_2_ground .eating > div:nth-child(2) {
-    left: 0%;
+    transform: translate(0%,0%);
 }
 
 .gameBox .scene .level_2_ground .eating > div:nth-child(3) {
-    left: 50%;
-    transform: rotateY(-180deg);
+    transform: translate(100%,0%) rotateY(-180deg);
 }
 
 .gameBox .scene .level_2_ground .sleeping {
@@ -764,12 +763,11 @@ img {
 }
 
 .gameBox .scene .level_2_ground .sleeping > div:nth-child(2) {
-    left: 0%;
+    transform: translate(0%,0%);
 }
 
 .gameBox .scene .level_2_ground .sleeping > div:nth-child(3) {
-    left: 50%;
-    transform: rotateY(-180deg);
+    transform: translate(100%,0%) rotateY(-180deg);
 }
 
 .gameBox .scene .level_2_ground .coding {
@@ -807,12 +805,11 @@ img {
 }
 
 .gameBox .scene .level_2_ground .coding > div:nth-child(2) {
-    left: 0%;
+    transform: translate(0%,0%);
 }
 
 .gameBox .scene .level_2_ground .coding > div:nth-child(3) {
-    left: 50%;
-    transform: rotateY(-180deg);
+    transform: translate(100%,0%) rotateY(-180deg);
 }
 
 .gameBox .scene > li:nth-child(2) .hobby {
