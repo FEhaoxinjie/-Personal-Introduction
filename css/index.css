@@ -241,7 +241,7 @@ img {
 
 .particleBg {
     height: 100%;
-    background-image: linear-gradient(to right, #434343 0%, black 100%);
+    background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
     opacity: 0;
     transition: all 1s;
 }
