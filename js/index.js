@@ -341,7 +341,7 @@ let personlDescription = (function () {
                                             person.style.filter = 'grayscale(70%)';
                                             level_3_ground.style.filter = 'grayscale(70%)';
                                             audio[2].play();
-                                        }, 2000)
+                                        }, 5000)
 
                                     }
                                 }, 10);
