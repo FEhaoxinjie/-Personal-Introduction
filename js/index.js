@@ -412,7 +412,7 @@ let personlDescription = (function () {
                     return;
                 }
                 personRun();
-            }, 20)
+            }, 50)
         })
         $right.on('tap', function () {
             window.clearInterval($left[0].moveTimer);
@@ -430,7 +430,7 @@ let personlDescription = (function () {
                 }
                 personRun();
                 scene.style.left = parseFloat(scene.style.left) - .2 + 'rem';
-            }, 20);
+            }, 50);
         });
 
         $stop.on('tap', function () {
