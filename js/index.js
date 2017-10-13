@@ -1,6 +1,7 @@
 let personlDescription = (function () {
     let person = document.getElementById('person'),
-        imgBox = person.getElementsByTagName('img')[0],
+        imgList = person.getElementsByTagName('img'),
+        imgBox = imgList[0],
         audio = document.getElementsByTagName('audio'),
         scene = document.getElementById('scene'),
         level_2 = scene.getElementsByClassName('level_2')[0],
@@ -9,16 +10,18 @@ let personlDescription = (function () {
         fireWorks = document.getElementById('fireWorks'),
         endingText = document.getElementsByClassName('endingText')[0],
         endingTextSpan = endingText.getElementsByTagName('span'),
-        abilityBox = document.getElementsByClassName('ability')[0],
-        waterList = abilityBox.getElementsByClassName('water'),
-        readyBtn = document.getElementById('readyBtn'),
-        gameBox = document.getElementById('gameBox'),
         a = .5, v = 0,
         into_Level2 = false,
         leave_Level2 = true,
+        abilityBox = document.getElementsByClassName('ability')[0],
+        waterList = abilityBox.getElementsByClassName('water'),
         RootFs = parseFloat(document.documentElement.style.fontSize),
-        loadingTimer = null,
-        randomNum = null;
+        loadingTimer=null,
+        randomNum=null
+        readyBtn = document.getElementById('readyBtn')
+    ;
+
+    let gameBox = document.getElementById('gameBox');
 
     function loading() {
         randomNum = Math.round(Math.random() * 1500 + 500);
@@ -34,6 +37,7 @@ let personlDescription = (function () {
             startPage();
         }, false);
     }
+
 
     function startPage() {
         audio[0].play();
@@ -449,6 +453,7 @@ let personlDescription = (function () {
         }
     }
 })();
+
 personlDescription.init();
 
 
