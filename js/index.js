@@ -17,9 +17,8 @@ let personlDescription = (function () {
         waterList = abilityBox.getElementsByClassName('water'),
         RootFs = parseFloat(document.documentElement.style.fontSize),
         loadingTimer=null,
-        randomNum=null
-        readyBtn = document.getElementById('readyBtn')
-    ;
+        randomNum=null,
+        readyBtn = document.getElementById('readyBtn');
 
     let gameBox = document.getElementById('gameBox');
 
