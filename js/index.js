@@ -48,8 +48,8 @@ let personlDescription = (function () {
                 'Images/person/Boy_Jump.gif',
                 'Images/person/Boy_Run.gif',
                 'music/bgMusic.aac',
-                'fireWorkMusic.mp3',
-                'step_bg.wav',
+                'music/fireWorkMusic.mp3',
+                'music/step_bg.wav',
             ],
             n = 0,
             m = imgList.length;
