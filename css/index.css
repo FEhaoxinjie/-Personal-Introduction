@@ -698,7 +698,7 @@ img {
     width: 100%;
     height: 100%;
     transform: scale(0);
-    background: url(../Images/bg/eating.gif) 0 10% no-repeat #AFEEEE;
+    /*background: url(../Images/bg/eating.gif) 0 10% no-repeat #AFEEEE;*/
     -webkit-background-size: 100%;
     background-size: 100%;
     transition: all 2s;
@@ -796,7 +796,7 @@ img {
     width: 50%;
     height: 100%;
     margin: 0;
-    background: url(../Images/bg/ground05.png) 0 0 no-repeat;
+    /*background: url(../Images/bg/ground05.png) 0 0 no-repeat;*/
     transition: all 2s;
     z-index: 3;
 
