@@ -27,73 +27,70 @@ let personlDescription = (function () {
 
     let gameBox = document.getElementById('gameBox');
 
-    // function loading() {
-    //     let imgList = [
-    //             'Images/bg/bg2.png',
-    //             'Images/bg/cloud.png',
-    //             'Images/bg/coding.gif',
-    //             'Images/bg/eating.gif',
-    //             'Images/bg/ground01.png',
-    //             'Images/bg/ground03.png',
-    //             'Images/bg/ground05.png',
-    //             'Images/bg/loading.gif',
-    //             'Images/bg/loadingbg.gif',
-    //             'Images/bg/sleeping.png',
-    //             'Images/bg/sun.png',
-    //             'Images/obstacle/left.png',
-    //             'Images/obstacle/Mushroom_1.png',
-    //             'Images/obstacle/Mushroom_2.png',
-    //             'Images/obstacle/right.png',
-    //             'Images/obstacle/Sign_2.png',
-    //             'Images/obstacle/stop.png',
-    //             'Images/obstacle/Tree_2.png',
-    //             'Images/person/Boy_Crouch.gif',
-    //             'Images/person/Boy_Down.gif',
-    //             'Images/person/Boy_Idle.gif',
-    //             'Images/person/Boy_Jump.gif',
-    //             'Images/person/Boy_Run.gif'
-    //         ],
-    //         n = 0,
-    //         m = imgList.length;
-    //
-    //     imgList.forEach(function (item, index) {
-    //         let img = new Image;
-    //         img.src = item;
-    //         img.onload = function () {
-    //             n++;
-    //             console.log(n);
-    //             if (n >= m) {
-    //                 document.getElementById('loadingBg').style.opacity = 0;
-    //                 document.getElementsByClassName('particleBg')[0].style.opacity = 1;
-    //                 readyBtn.style.animationPlayState = 'running';
-    //                 readyBtn.addEventListener('click', function () {
-    //                     document.getElementById('loadingBg').style.display = 'none';
-    //                     document.getElementsByClassName('particleBg')[0].style.display = 'none';
-    //                     startPage();
-    //                 }, false);
-    //             }
-    //         }
-    //     })
-    //
-    // }
-
     function loading() {
         let loadingBg = document.getElementById('loadingBg'),
-            particleBg = document.getElementsByClassName('particleBg')[0],
-            ramNum = Math.round(Math.random() * 3000 + 2000);
-        loadingBg.dealyTimer = window.setTimeout(function () {
-            loadingBg.style.opacity = 0;
-            particleBg.style.opacity = 1;
-            readyBtn.style.animationPlayState = 'running';
-            readyBtn.addEventListener('click', function () {
-                loadingBg.style.display = 'none';
-                particleBg.style.display = 'none';
-                startPage();
-            })
-            window.clearTimeout(loadingBg.dealyTimer);
-        }, ramNum);
+            ranNum = Math.round(Math.random() * 2000 + 1000),
+            particleBg = document.getElementsByClassName('particleBg')[0];
+        let imgList = [
+                'Images/bg/cloud.png',
+                'Images/bg/ground01.png',
+                'Images/bg/ground03.png',
+                'Images/bg/ground05.png',
+                'Images/bg/sleeping.png',
+                'Images/bg/sun.png',
+                'Images/obstacle/left.png',
+                'Images/obstacle/Mushroom_1.png',
+                'Images/obstacle/Mushroom_2.png',
+                'Images/obstacle/right.png',
+                'Images/obstacle/Sign_2.png',
+                'Images/obstacle/stop.png',
+                'Images/obstacle/Tree_2.png',
+            ],
+            n = 0,
+            m = imgList.length;
+
+        imgList.forEach(function (item, index) {
+            let img = new Image;
+            img.src = item;
+            img.onload = function () {
+                n++;
+                console.log(n);
+                if (n >= m) {
+
+                    loadingBg.dealyTimer = window.setTimeout(function () {
+                        loadingBg.style.opacity = 0;
+                        particleBg.style.opacity = 1;
+                        readyBtn.style.animationPlayState = 'running';
+                        readyBtn.addEventListener('click', function () {
+                            loadingBg.style.display = 'none';
+                            particleBg.style.display = 'none';
+                            startPage();
+
+                        }, false);
+                    }, ranNum)
+                }
+            }
+        })
 
     }
+
+    // function loading() {
+    //     let loadingBg = document.getElementById('loadingBg'),
+    //         particleBg = document.getElementsByClassName('particleBg')[0],
+    //         ramNum = Math.round(Math.random() * 3000 + 2000);
+    //     loadingBg.dealyTimer = window.setTimeout(function () {
+    //         loadingBg.style.opacity = 0;
+    //         particleBg.style.opacity = 1;
+    //         readyBtn.style.animationPlayState = 'running';
+    //         readyBtn.addEventListener('click', function () {
+    //             loadingBg.style.display = 'none';
+    //             particleBg.style.display = 'none';
+    //             startPage();
+    //         })
+    //         window.clearTimeout(loadingBg.dealyTimer);
+    //     }, ramNum);
+    //
+    // }
 
     function startPage() {
         audio[0].play();
@@ -313,8 +310,8 @@ let personlDescription = (function () {
             eatingBox.style.transform = 'scale(1)';
             occlusion.style.transform = 'scale(0)';
             enterEating = true;
-            enterSleeping=false;
-            enterCoding=false;
+            enterSleeping = false;
+            enterCoding = false;
         } else if ((Math.abs(sceneTranslate * RootFs) + 2 * RootFs >= level_2.offsetLeft + sleeping.offsetLeft) && (Math.abs(sceneTranslate * RootFs) + 2 * RootFs < level_2.offsetLeft + coding.offsetLeft)) {
             if (enterSleeping === true) {
                 return;
@@ -543,7 +540,11 @@ let personlDescription = (function () {
         }
     }
 })();
-personlDescription.init();
+
+window.onload = function () {
+    personlDescription.init();
+}
+
 
 
 
