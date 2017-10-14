@@ -50,20 +50,20 @@ let RENDERER = {
         contextFireworks.fillStyle = this.SKY_COLOR.replace('%luminance', 5 + maxOpacity * 15);
         contextFireworks.fillRect(0, 0, this.width, this.height);
 
-        for(let i = this.fireworks.length - 1; i >= 0; i--){
-            if(!this.fireworks[i].render(contextFireworks)){
-                this.fireworks.splice(i, 1);
-            }
-        }
+        // for(let i = this.fireworks.length - 1; i >= 0; i--){
+        //     if(!this.fireworks[i].render(contextFireworks)){
+        //         this.fireworks.splice(i, 1);
+        //     }
+        // }
         for(let i = this.stars.length - 1; i >= 0; i--){
             this.stars[i].render(contextTwigs);
         }
 
-        if(--this.fireworkInterval === 0){
-            this.fireworks.push(new FIREWORK(this.width, this.height, this));
-            this.maxFireworkInterval = this.getRandomValue(this.FIREWORK_INTERVAL_RANGE) | 0;
-            this.fireworkInterval = this.maxFireworkInterval;
-        }
+        // if(--this.fireworkInterval === 0){
+        //     this.fireworks.push(new FIREWORK(this.width, this.height, this));
+        //     this.maxFireworkInterval = this.getRandomValue(this.FIREWORK_INTERVAL_RANGE) | 0;
+        //     this.fireworkInterval = this.maxFireworkInterval;
+        // }
     }
 };
 
