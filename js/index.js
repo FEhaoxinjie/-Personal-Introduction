@@ -82,7 +82,6 @@ let personlDescription = (function () {
 
         gameBox.style.display = 'block';
         gameBox.style.opacity = '1';
-        RENDERER.init();
         person.timer1 = window.setInterval(function () {
             if ((parseFloat(person.style.bottom) <= 16)) {
                 window.clearInterval(person.timer1);
@@ -373,6 +372,7 @@ let personlDescription = (function () {
                                         window.clearInterval(waterList[4].waterTimer);
 
                                         fireWorks.fireworkTimer = window.setTimeout(function () {
+                                            RENDERER.init();
                                             fireWorks.style.top = '0%';
                                             endingTextSpan[0].style.animationPlayState = 'running';
                                             endingTextSpan[1].style.animationPlayState = 'running';
