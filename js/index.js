@@ -15,6 +15,9 @@ let personlDescription = (function () {
         rightKey = false,
         into_Level2 = false,
         leave_Level2 = true,
+        enterEating = false,
+        enterSleeping = false,
+        enterCoding = false,
         sceneTranslate = null,
         abilityBox = document.getElementsByClassName('ability')[0],
         waterList = abilityBox.getElementsByClassName('water'),
@@ -77,9 +80,8 @@ let personlDescription = (function () {
     function loading() {
         let loadingBg = document.getElementById('loadingBg'),
             particleBg = document.getElementsByClassName('particleBg')[0],
-        ramNum=Math.round(Math.random()*3000+2000);
-        console.log(ramNum);
-        loadingBg.dealyTimer=window.setTimeout(function () {
+            ramNum = Math.round(Math.random() * 3000 + 2000);
+        loadingBg.dealyTimer = window.setTimeout(function () {
             loadingBg.style.opacity = 0;
             particleBg.style.opacity = 1;
             readyBtn.style.animationPlayState = 'running';
@@ -89,7 +91,7 @@ let personlDescription = (function () {
                 startPage();
             })
             window.clearTimeout(loadingBg.dealyTimer);
-        },ramNum);
+        }, ramNum);
 
     }
 
@@ -302,21 +304,39 @@ let personlDescription = (function () {
             sun = document.getElementsByClassName('sun')[0],
             hobby = level_2.getElementsByClassName('hobby')[0],
             occlusion = hobby.getElementsByClassName('occlusion')[0];
-
         if ((Math.abs(sceneTranslate * RootFs) + 2 * RootFs >= level_2.offsetLeft + eating.offsetLeft) && (Math.abs(sceneTranslate * RootFs) + 2 * RootFs < level_2.offsetLeft + sleeping.offsetLeft)) {
+            if (enterEating === true) {
+                return
+            }
             eatingDiv[1].style.transform = 'translate(-100%,0%)';
             eatingDiv[2].style.transform = 'translate(200%,0%) rotateY(-180deg)';
             eatingBox.style.transform = 'scale(1)';
             occlusion.style.transform = 'scale(0)';
+            enterEating = true;
+            enterSleeping=false;
+            enterCoding=false;
         } else if ((Math.abs(sceneTranslate * RootFs) + 2 * RootFs >= level_2.offsetLeft + sleeping.offsetLeft) && (Math.abs(sceneTranslate * RootFs) + 2 * RootFs < level_2.offsetLeft + coding.offsetLeft)) {
+            if (enterSleeping === true) {
+                return;
+            }
             sleepingDiv[1].style.transform = 'translate(-100%,0%)';
             sleepingDiv[2].style.transform = 'translate(200%,0%) rotateY(-180deg)';
             sleepingBox.style.transform = 'scale(1)';
+            enterEating = false;
+            enterCoding = false;
+            enterSleeping = true;
         } else if ((Math.abs(sceneTranslate * RootFs) + 2 * RootFs >= level_2.offsetLeft + coding.offsetLeft) && (Math.abs(sceneTranslate * RootFs) + 2 * RootFs < level_2.offsetLeft + coding.offsetLeft + codingBox.offsetWidth)) {
+
+            if (enterCoding === true) {
+                return;
+            }
             codingDiv[1].style.transform = 'translate(-100%,0%)';
             codingDiv[2].style.transform = 'translate(200%,0%) rotateY(-180deg)';
             codingBox.style.transform = 'scale(1)';
             sun.classList.add('sunMove');
+            enterEating = false;
+            enterCoding = true;
+            enterSleeping = true;
 
         } else {
             occlusion.style.transform = 'scale(1)';
@@ -519,12 +539,10 @@ let personlDescription = (function () {
 
     return {
         init: function () {
-           loading();
+            loading();
         }
     }
-})
-();
-
+})();
 personlDescription.init();
 
 
