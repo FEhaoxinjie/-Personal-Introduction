@@ -16,27 +16,61 @@ let personlDescription = (function () {
         abilityBox = document.getElementsByClassName('ability')[0],
         waterList = abilityBox.getElementsByClassName('water'),
         RootFs = parseFloat(document.documentElement.style.fontSize),
-        loadingTimer=null,
-        randomNum=null,
+        loadingTimer = null,
+        randomNum = null,
         readyBtn = document.getElementById('readyBtn');
 
     let gameBox = document.getElementById('gameBox');
 
     function loading() {
-        randomNum = Math.round(Math.random() * 1500 + 500);
-        loadingTimer = window.setTimeout(function () {
-            document.getElementById('loadingBg').style.opacity = 0;
-            document.getElementsByClassName('particleBg')[0].style.opacity = 1;
-            readyBtn.style.animationPlayState = 'running';
-            window.clearTimeout(loadingTimer);
-        }, randomNum)
-        readyBtn.addEventListener('click', function () {
-            document.getElementById('loadingBg').style.display = 'none';
-            document.getElementsByClassName('particleBg')[0].style.display = 'none';
-            startPage();
-        }, false);
-    }
+        let imgList = [
+                'Images/bg/bg2.png',
+                'Images/bg/cloud.png',
+                'Images/bg/coding.gif',
+                'Images/bg/eating.gif',
+                'Images/bg/ground01.png',
+                'Images/bg/ground03.png',
+                'Images/bg/ground05.png',
+                'Images/bg/loading.gif',
+                'Images/bg/loadingbg.gif',
+                'Images/bg/sleeping.png',
+                'Images/bg/sun.png',
+                'Images/obstacle/left.png',
+                'Images/obstacle/Mushroom_1.png',
+                'Images/obstacle/Mushroom_2.png',
+                'Images/obstacle/right.png',
+                'Images/obstacle/Sign_2.png',
+                'Images/obstacle/stop.png',
+                'Images/obstacle/Tree_2.png',
+                'Images/person/Boy_Crouch.gif',
+                'Images/person/Boy_Down.gif',
+                'Images/person/Boy_Idle.gif',
+                'Images/person/Boy_Jump.gif',
+                'Images/person/Boy_Run.gif'
+            ],
+            n = 0,
+            m = imgList.length;
 
+        imgList.forEach(function (item,index) {
+            let img=new Image;
+            img.src=item;
+            img.onload=function () {
+              n++;
+                console.log(n);
+                if (n>=m){
+                  document.getElementById('loadingBg').style.opacity = 0;
+                      document.getElementsByClassName('particleBg')[0].style.opacity = 1;
+                      readyBtn.style.animationPlayState = 'running';
+                  readyBtn.addEventListener('click', function () {
+                      document.getElementById('loadingBg').style.display = 'none';
+                      document.getElementsByClassName('particleBg')[0].style.display = 'none';
+                      startPage();
+                  }, false);
+              }
+            }
+        })
+        
+    }
 
     function startPage() {
         audio[0].play();
@@ -161,7 +195,6 @@ let personlDescription = (function () {
 
 
     }
-
 
     function intoLevel2() {
         let personW = (person.offsetWidth),
@@ -416,7 +449,6 @@ let personlDescription = (function () {
         })
         $right.on('tap', function () {
             window.clearInterval($left[0].moveTimer);
-            console.log($right[0].moveTimer);
             if ($right[0].moveTimer !== undefined) {
                 console.log(2);
                 return;
