@@ -300,7 +300,6 @@ let personlDescription = (function () {
             sun.classList.add('sunMove');
 
         } else {
-            console.log(1);
             occlusion.style.transform = 'scale(1)';
             eatingDiv[1].style.transform = 'translate(0%,0%)';
             eatingDiv[2].style.transform = 'translate(100%,0%) rotateY(-180deg)';
