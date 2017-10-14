@@ -11,13 +11,15 @@ let personlDescription = (function () {
         endingText = document.getElementsByClassName('endingText')[0],
         endingTextSpan = endingText.getElementsByTagName('span'),
         a = .5, v = 0,
+        leftKey=false,
+        rightKey=false,
         into_Level2 = false,
         leave_Level2 = true,
+        sceneTranslate=null,
         abilityBox = document.getElementsByClassName('ability')[0],
         waterList = abilityBox.getElementsByClassName('water'),
         RootFs = parseFloat(document.documentElement.style.fontSize),
         loadingTimer = null,
-        randomNum = null,
         readyBtn = document.getElementById('readyBtn');
 
     let gameBox = document.getElementById('gameBox');
@@ -51,22 +53,22 @@ let personlDescription = (function () {
             n = 0,
             m = imgList.length;
 
-        imgList.forEach(function (item,index) {
-            let img=new Image;
-            img.src=item;
-            img.onload=function () {
-              n++;
+        imgList.forEach(function (item, index) {
+            let img = new Image;
+            img.src = item;
+            img.onload = function () {
+                n++;
                 console.log(n);
-                if (n>=m){
-                  document.getElementById('loadingBg').style.opacity = 0;
-                      document.getElementsByClassName('particleBg')[0].style.opacity = 1;
-                      readyBtn.style.animationPlayState = 'running';
-                  readyBtn.addEventListener('click', function () {
-                      document.getElementById('loadingBg').style.display = 'none';
-                      document.getElementsByClassName('particleBg')[0].style.display = 'none';
-                      startPage();
-                  }, false);
-              }
+                if (n >= m) {
+                    document.getElementById('loadingBg').style.opacity = 0;
+                    document.getElementsByClassName('particleBg')[0].style.opacity = 1;
+                    readyBtn.style.animationPlayState = 'running';
+                    readyBtn.addEventListener('click', function () {
+                        document.getElementById('loadingBg').style.display = 'none';
+                        document.getElementsByClassName('particleBg')[0].style.display = 'none';
+                        startPage();
+                    }, false);
+                }
             }
         })
 
@@ -103,26 +105,21 @@ let personlDescription = (function () {
 
     function bindKey() {
         window.onkeydown = function (e) {
+
             if (e.keyCode === 37) {
+                leftKey=true;
                 level1Info();
-                person.style.transform = 'rotateY(180deg)';
                 audio[1].play();
-                if (parseFloat(scene.style.left) * RootFs / scene.offsetWidth >= 0.6) {
+               personRun();
+                level2Info();
 
-                    return;
-                }
-                personRun();
             } else if (e.keyCode === 39) {
+                rightKey=true;
                 level1Info();
-                person.style.transform = 'rotateY(0deg)';
                 audio[1].play();
-                if (Math.abs(parseFloat(scene.style.left) * RootFs) / scene.offsetWidth >= 0.6) {
-                    return;
-                }
                 personRun();
-                scene.style.left = parseFloat(scene.style.left) - .2 + 'rem';
-
-
+                intoLevel2();
+                level2Info();
             }
             window.onkeyup = function (e) {
                 audio[1].pause();
@@ -135,11 +132,23 @@ let personlDescription = (function () {
 
     function personRun() {
         let person_run = person.dataset.run;
-        if (parseFloat(scene.style.left) < 0) {
-            scene.style.left = parseFloat(scene.style.left) + .1 + 'rem';
-            intoLevel2();
-            level2Info();
+            sceneTranslate = parseFloat(/(-?\d+\.?\d*)/g.exec(scene.style.transform)[1]);
+        if (Math.abs(sceneTranslate) * RootFs / scene.offsetWidth >= 0.6) {
+            return;
         }
+        if(leftKey===true){
+            if (sceneTranslate<0){
+                sceneTranslate += 0.1;
+            }
+        person.style.transform = 'rotateY(180deg)';
+        scene.style.transform = 'translateX(' + sceneTranslate+'rem)';
+       leftKey=false;
+       }else if(rightKey===true){
+            sceneTranslate -= 0.1;
+           person.style.transform = 'rotateY(0deg)';
+           scene.style.transform = 'translateX(' +sceneTranslate+ 'rem)';
+           rightKey=false;
+       }
         if (person_run === 'true') return;
         imgBox.src = 'Images/person/Boy_Run.gif';
         person.dataset.run = true;
@@ -152,16 +161,12 @@ let personlDescription = (function () {
             meInfoLi = meInfo.getElementsByTagName('li'),
             meInfoSpan = meInfo.getElementsByTagName('span');
 
-        if (Math.abs(parseFloat(scene.style.left)) <= 1) {
+        if (Math.abs(sceneTranslate) <= 1) {
             return;
         }
-        if (Math.abs(parseFloat(scene.style.left)) >= 3 && Math.abs(parseFloat(scene.style.left)) <= 8) {
+        if (Math.abs(sceneTranslate) >= 3 && Math.abs(sceneTranslate) <= 8) {
             aboutMe_top.style.opacity = '1';
             aboutMe_top.style.transitionDelay = '0s';
-            // for (let i = 0; i < aboutMe_topSpan.length; i++) {
-            //     let itemSpan = aboutMe_topSpan[i];
-            //     itemSpan.style.opacity = '1';
-            // }
             for (let i = 0; i < meInfoLi.length; i++) {
                 let itemLi = meInfoLi[i];
                 if (itemLi.style.transform === 'rotateX(0deg)') continue;
@@ -193,12 +198,11 @@ let personlDescription = (function () {
             }
         }
 
-
     }
 
     function intoLevel2() {
         let personW = (person.offsetWidth),
-            sceneLeft = Math.abs(scene.offsetLeft),
+            sceneLeft = Math.abs(sceneTranslate*RootFs),
             level_2Left = level_2.offsetLeft,
             level_2Width = level_2.offsetWidth;
         if ((sceneLeft + personW + 30 >= level_2Left) && (sceneLeft + personW - 50 < level_2Left + level_2Width)) {
@@ -281,22 +285,23 @@ let personlDescription = (function () {
             hobby = level_2.getElementsByClassName('hobby')[0],
             occlusion = hobby.getElementsByClassName('occlusion')[0];
 
-        if ((Math.abs(scene.offsetLeft) + 2 * RootFs >= level_2.offsetLeft + eating.offsetLeft) && (Math.abs(scene.offsetLeft) + 2 * RootFs < level_2.offsetLeft + sleeping.offsetLeft)) {
+        if ((Math.abs(sceneTranslate*RootFs) + 2 * RootFs >= level_2.offsetLeft + eating.offsetLeft) && (Math.abs(sceneTranslate*RootFs) + 2 * RootFs < level_2.offsetLeft + sleeping.offsetLeft)) {
             eatingDiv[1].style.transform = 'translate(-100%,0%)';
             eatingDiv[2].style.transform = 'translate(200%,0%) rotateY(-180deg)';
             eatingBox.style.transform = 'scale(1)';
             occlusion.style.transform = 'scale(0)';
-        } else if ((Math.abs(scene.offsetLeft) + 2 * RootFs >= level_2.offsetLeft + sleeping.offsetLeft) && (Math.abs(scene.offsetLeft) + 2 * RootFs < level_2.offsetLeft + coding.offsetLeft)) {
+        } else if ((Math.abs(sceneTranslate*RootFs) + 2 * RootFs >= level_2.offsetLeft + sleeping.offsetLeft) && (Math.abs(sceneTranslate*RootFs) + 2 * RootFs < level_2.offsetLeft + coding.offsetLeft)) {
             sleepingDiv[1].style.transform = 'translate(-100%,0%)';
             sleepingDiv[2].style.transform = 'translate(200%,0%) rotateY(-180deg)';
             sleepingBox.style.transform = 'scale(1)';
-        } else if ((Math.abs(scene.offsetLeft) + 2 * RootFs >= level_2.offsetLeft + coding.offsetLeft) && (Math.abs(scene.offsetLeft) + 2 * RootFs < level_2.offsetLeft + coding.offsetLeft + codingBox.offsetWidth)) {
+        } else if ((Math.abs(sceneTranslate*RootFs) + 2 * RootFs >= level_2.offsetLeft + coding.offsetLeft) && (Math.abs(sceneTranslate*RootFs) + 2 * RootFs < level_2.offsetLeft + coding.offsetLeft + codingBox.offsetWidth)) {
             codingDiv[1].style.transform = 'translate(-100%,0%)';
             codingDiv[2].style.transform = 'translate(200%,0%) rotateY(-180deg)';
             codingBox.style.transform = 'scale(1)';
             sun.classList.add('sunMove');
 
         } else {
+            console.log(1);
             occlusion.style.transform = 'scale(1)';
             eatingDiv[1].style.transform = 'translate(0%,0%)';
             eatingDiv[2].style.transform = 'translate(100%,0%) rotateY(-180deg)';
@@ -437,31 +442,47 @@ let personlDescription = (function () {
             window.clearInterval($right[0].moveTimer);
             if ($left[0].moveTimer !== undefined) return;
             $left[0].moveTimer = window.setInterval(function () {
+                let person_run = person.dataset.run;
                 level1Info();
-                person.style.transform = 'rotateY(180deg)';
                 audio[1].play();
-                if (parseFloat(scene.style.left) * RootFs / scene.offsetWidth >= 0.6) {
+                if (sceneTranslate * RootFs / scene.offsetWidth >= 0.6) {
 
                     return;
                 }
-                personRun();
-            }, 50)
+                if (sceneTranslate<0){
+                    sceneTranslate += 0.1;
+                }
+                person.style.transform = 'rotateY(180deg)';
+                scene.style.transform = 'translateX(' + sceneTranslate+'rem)';
+                intoLevel2();
+                level2Info();
+                if (person_run === 'true') return;
+                imgBox.src = 'Images/person/Boy_Run.gif';
+                person.dataset.run = true;
+                }, 50)
         })
         $right.on('tap', function () {
             window.clearInterval($left[0].moveTimer);
             if ($right[0].moveTimer !== undefined) {
-                console.log(2);
                 return;
             }
             $right[0].moveTimer = window.setInterval(function () {
+                let person_run = person.dataset.run;
                 level1Info();
                 person.style.transform = 'rotateY(0deg)';
                 audio[1].play();
-                if (Math.abs(parseFloat(scene.style.left) * RootFs) / scene.offsetWidth >= 0.6) {
+                if (Math.abs(sceneTranslate * RootFs) / scene.offsetWidth >= 0.6) {
                     return;
                 }
-                personRun();
-                scene.style.left = parseFloat(scene.style.left) - .2 + 'rem';
+                sceneTranslate -= 0.1;
+                person.style.transform = 'rotateY(0deg)';
+                scene.style.transform = 'translateX(' +sceneTranslate+ 'rem)';
+                rightKey=false;
+                intoLevel2();
+                level2Info();
+                if (person_run === 'true') return;
+                imgBox.src = 'Images/person/Boy_Run.gif';
+                person.dataset.run = true;
             }, 50);
         });
 
@@ -483,7 +504,8 @@ let personlDescription = (function () {
             loading();
         }
     }
-})();
+})
+();
 
 personlDescription.init();
 
