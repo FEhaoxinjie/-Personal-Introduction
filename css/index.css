@@ -740,7 +740,7 @@ img {
     width: 100%;
     height: 100%;
     transform: scale(0);
-    background: url(../Images/bg/sleeping.png) 0 10% no-repeat #AFEEEE;
+    /*background: url(../Images/bg/sleeping.png) 0 10% no-repeat #AFEEEE;*/
     -webkit-background-size: 100%;
     background-size: 100%;
     transition: all 2s;
@@ -782,7 +782,7 @@ img {
     width: 100%;
     height: 100%;
     transform: scale(0);
-    background: url(../Images/bg/coding.gif) 0 10% no-repeat #AFEEEE;
+    /*background: url(../Images/bg/coding.gif) 0 10% no-repeat #AFEEEE;*/
     -webkit-background-size: 100%;
     background-size: 100%;
     transition: all 2s;
