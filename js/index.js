@@ -1,4 +1,4 @@
-let personlDescription = (function () {
+let personalDescription = (function () {
     let person = document.getElementById('person'),
         imgList = person.getElementsByTagName('img'),
         imgBox = imgList[0],
@@ -54,7 +54,6 @@ let personlDescription = (function () {
             img.src = item;
             img.onload = function () {
                 n++;
-                console.log(n);
                 if (n >= m) {
 
                     loadingBg.dealyTimer = window.setTimeout(function () {
@@ -128,6 +127,7 @@ let personlDescription = (function () {
                 level1Info();
                 audio[1].play();
                 personRun();
+                intoLevel2();
                 level2Info();
 
             } else if (e.keyCode === 39) {
@@ -222,11 +222,11 @@ let personlDescription = (function () {
             sceneLeft = Math.abs(sceneTranslate * RootFs),
             level_2Left = level_2.offsetLeft,
             level_2Width = level_2.offsetWidth;
-        if ((sceneLeft + personW + 30 >= level_2Left) && (sceneLeft + personW - 50 < level_2Left + level_2Width)) {
+        if ((sceneLeft + personW + 30 >= level_2Left) && (sceneLeft + personW -50 < level_2Left + level_2Width)) {
             if (into_Level2 === true && (leave_Level2 === false)) {
                 fireWorks.style.top = '100%';
                 endingTextSpan[0].style.animationPlayState = 'paused';
-                endingTextSpan[1].style.animationPlayState = 'paused';
+                endingTextSpan[0].style.animationFillMode = 'none';
                 person.style.filter = 'grayscale(0%)';
                 level_3_ground.style.filter = 'grayscale(0%)';
                 abilityBox.style.opacity = 0;
@@ -305,6 +305,7 @@ let personlDescription = (function () {
             if (enterEating === true) {
                 return
             }
+            console.log('eating');
             eatingDiv[1].style.transform = 'translate(-100%,0%)';
             eatingDiv[2].style.transform = 'translate(200%,0%) rotateY(-180deg)';
             eatingBox.style.transform = 'scale(1)';
@@ -319,6 +320,7 @@ let personlDescription = (function () {
             sleepingDiv[1].style.transform = 'translate(-100%,0%)';
             sleepingDiv[2].style.transform = 'translate(200%,0%) rotateY(-180deg)';
             sleepingBox.style.transform = 'scale(1)';
+            occlusion.style.transform = 'scale(0)';
             enterEating = false;
             enterCoding = false;
             enterSleeping = true;
@@ -327,13 +329,15 @@ let personlDescription = (function () {
             if (enterCoding === true) {
                 return;
             }
+            console.log('coding');
             codingDiv[1].style.transform = 'translate(-100%,0%)';
             codingDiv[2].style.transform = 'translate(200%,0%) rotateY(-180deg)';
             codingBox.style.transform = 'scale(1)';
             sun.classList.add('sunMove');
+            occlusion.style.transform = 'scale(0)';
             enterEating = false;
             enterCoding = true;
-            enterSleeping = true;
+            enterSleeping = false;
 
         } else {
             occlusion.style.transform = 'scale(1)';
@@ -347,6 +351,10 @@ let personlDescription = (function () {
             codingDiv[2].style.transform = 'translate(100%,0%) rotateY(-180deg)';
             codingBox.style.transform = 'scale(0)';
             sun.classList.remove('sunMove');
+            occlusion.style.transform = 'scale(1)';
+            enterEating = false;
+            enterCoding = false;
+            enterSleeping = false;
         }
 
     }
@@ -410,10 +418,12 @@ let personlDescription = (function () {
                                             RENDERER.init();
                                             fireWorks.style.top = '0%';
                                             endingTextSpan[0].style.animationPlayState = 'running';
-                                            endingTextSpan[1].style.animationPlayState = 'running';
+                                                endingTextSpan[0].style.animationFillMode = 'forwards';
+
                                             person.style.filter = 'grayscale(70%)';
                                             level_3_ground.style.filter = 'grayscale(70%)';
                                             audio[2].play();
+                                            window.clearTimeout(fireWorks.fireworkTimer);
                                         }, 5000)
 
                                     }
@@ -542,7 +552,7 @@ let personlDescription = (function () {
 })();
 
 window.onload = function () {
-    personlDescription.init();
+    personalDescription.init();
 }
 
 
