@@ -397,7 +397,7 @@ img {
 
 /*背景*/
 .gameBox .scene {
-    width: 500%;
+    width: 1000%;
     height: 100%;
     position: absolute;
 }
