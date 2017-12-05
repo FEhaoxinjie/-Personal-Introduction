@@ -99,9 +99,11 @@ let personalDescription = (function () {
 
         gameBox.style.display = 'block';
         gameBox.style.opacity = '1';
-        person.timer1 = window.setInterval(function () {
+
+        function personStartActions() {
+            console.log(1);
             if ((parseFloat(person.style.bottom) <= 16)) {
-                window.clearInterval(person.timer1);
+                window.cancelAnimationFrame( person.timer1);
                 person.style.bottom = 16 + '%';
                 v = 0;
                 person.timer2 = window.setTimeout(function () {
@@ -115,8 +117,11 @@ let personalDescription = (function () {
             v += a;
             let topVal = parseFloat(person.style.bottom)
             person.style.bottom = topVal - v + '%';
+            window.requestAnimationFrame(personStartActions)
 
-        }, 17)
+        }
+
+        person.timer1 = window.requestAnimationFrame(personStartActions)
     }
 
     function bindKey() {
@@ -222,7 +227,7 @@ let personalDescription = (function () {
             sceneLeft = Math.abs(sceneTranslate * RootFs),
             level_2Left = level_2.offsetLeft,
             level_2Width = level_2.offsetWidth;
-        if ((sceneLeft + personW + 30 >= level_2Left) && (sceneLeft + personW -50 < level_2Left + level_2Width)) {
+        if ((sceneLeft + personW + 30 >= level_2Left) && (sceneLeft + personW - 50 < level_2Left + level_2Width)) {
             if (into_Level2 === true && (leave_Level2 === false)) {
                 fireWorks.style.top = '100%';
                 endingTextSpan[0].style.animationPlayState = 'paused';
@@ -259,32 +264,38 @@ let personalDescription = (function () {
     }
 
     function personJump() {
+        function personJumpActions () {
+            person.style.bottom = parseFloat(person.style.bottom) + 1 + '%';
+            if (parseFloat(person.style.bottom) >= 32) {
+                imgList[0].style.display = 'block';
+                imgList[1].style.display = 'none';
+                imgList[2].style.display = 'none';
+                window.clearTimeout(person.jumpDelayTimer);
+                window.cancelAnimationFrame(person.jumpTimer);
+               return;
+            }
+            window.requestAnimationFrame(personJumpActions) ;
+        }
         person.jumpDelayTimer = window.setTimeout(function () {
-            person.jumpTimer = window.setInterval(function () {
-                person.style.bottom = parseFloat(person.style.bottom) + 1 + '%';
-                if (parseFloat(person.style.bottom) >= 32) {
-                    imgList[0].style.display = 'block';
-                    imgList[1].style.display = 'none';
-                    imgList[2].style.display = 'none';
-                    window.clearTimeout(person.jumpDelayTimer);
-                    window.clearInterval(person.jumpTimer);
-                }
-            }, 17)
+            person.jumpTimer = window.requestAnimationFrame(personJumpActions) ;
         }, 100)
     }
 
     function personDown() {
+        function personDownActions () {
+            person.style.bottom = parseFloat(person.style.bottom) - 1 + '%';
+            if (parseFloat(person.style.bottom) <= 16) {
+                imgList[0].style.display = 'block';
+                imgList[1].style.display = 'none';
+                imgList[2].style.display = 'none';
+                window.clearTimeout(person.downDelayTimer);
+                window.cancelAnimationFrame(person.downTimer);
+                return;
+            }
+            window.requestAnimationFrame(personDownActions);
+        }
         person.downDelayTimer = window.setTimeout(function () {
-            person.downTimer = window.setInterval(function () {
-                person.style.bottom = parseFloat(person.style.bottom) - 1 + '%';
-                if (parseFloat(person.style.bottom) <= 16) {
-                    imgList[0].style.display = 'block';
-                    imgList[1].style.display = 'none';
-                    imgList[2].style.display = 'none';
-                    window.clearTimeout(person.downDelayTimer);
-                    window.clearInterval(person.downTimer);
-                }
-            }, 17);
+            person.downTimer = window.requestAnimationFrame(personDownActions);
         }, 0)
     }
 
@@ -360,80 +371,86 @@ let personalDescription = (function () {
     }
 
     function abilityWater() {
-        abilityBox.opacityTimer = window.setInterval(function () {
+        function abilityWateAction_1() {
+            function abilityWateAction_2() {
+                let abilityH = parseFloat(waterList[0].style.height);
+                waterList[0].style.height = abilityH + 1 + '%';
+                if (parseFloat(waterList[0].style.height) >= 100) {
+                    waterList[0].style.height = '100%';
+                    addPopo(waterList[0], true);
+                    window.cancelAnimationFrame(waterList[0].waterTimer);
+                    waterList[1].waterTimer = window.setInterval( function  () {
+                        let passW = parseFloat(waterList[1].style.width);
+                        waterList[1].style.width = passW + 1 + '%';
+                        if (parseFloat(waterList[1].style.width) >= 30 && parseFloat(waterList[1].style.width) < 60) {
+                            if (waterList[2].waterTimer) {
+                                return;
+                            }
+                            waterList[2].waterTimer = window.setInterval(function () {
+                                let abilityH = parseFloat(waterList[2].style.height);
+                                waterList[2].style.height = abilityH + 1 + '%';
+                                if (parseFloat(waterList[2].style.height) >= 70) {
+                                    waterList[2].style.height = '80%';
+                                    addPopo(waterList[2], true);
+                                    window.clearInterval(waterList[2].waterTimer);
+                                }
+                            }, 17);
+                        } else if (parseFloat(waterList[1].style.width) >= 60 && parseFloat(waterList[1].style.width) < 90) {
+                            if (waterList[3].waterTimer) {
+                                return;
+                            }
+                            waterList[3].waterTimer = window.setInterval(function () {
+                                let abilityH = parseFloat(waterList[3].style.height);
+                                waterList[3].style.height = abilityH + 1 + '%';
+                                if (parseFloat(waterList[3].style.height) >= 60) {
+                                    waterList[3].style.height = '70%'
+                                    addPopo(waterList[3], true);
+                                    window.clearInterval(waterList[3].waterTimer);
+
+                                }
+                            }, 17);
+                        } else if (parseFloat(waterList[1].style.width) >= 100) {
+                            waterList[1].style.width = '100%';
+                            addPopo(waterList[1], false);
+                            window.clearInterval(waterList[1].waterTimer);
+                            waterList[4].waterTimer = window.setInterval(function () {
+                                let abilityH = parseFloat(waterList[4].style.height);
+                                waterList[4].style.height = abilityH + 1 + '%';
+                                if (parseFloat(waterList[4].style.height) >= 98) {
+                                    waterList[4].style.height = '98%';
+                                    addPopo(waterList[4], true);
+                                    window.clearInterval(waterList[4].waterTimer);
+
+                                    fireWorks.fireworkTimer = window.setTimeout(function () {
+                                        RENDERER.init();
+                                        fireWorks.style.top = '0%';
+                                        endingTextSpan[0].style.animationPlayState = 'running';
+                                        endingTextSpan[0].style.animationFillMode = 'forwards';
+
+                                        person.style.filter = 'grayscale(70%)';
+                                        level_3_ground.style.filter = 'grayscale(70%)';
+                                        audio[2].play();
+                                        window.clearTimeout(fireWorks.fireworkTimer);
+                                    }, 5000)
+
+                                }
+                            }, 10);
+                        }
+                    }, 17)
+                    return;
+                }
+                window.requestAnimationFrame(abilityWateAction_2);
+            }
             abilityBox.style.opacity = parseFloat(abilityBox.style.opacity) + 0.01;
             if (abilityBox.style.opacity >= 1) {
                 abilityBox.style.opacity = 1;
-                window.clearInterval(abilityBox.opacityTimer);
-                waterList[0].waterTimer = window.setInterval(function () {
-                    let abilityH = parseFloat(waterList[0].style.height);
-                    waterList[0].style.height = abilityH + 1 + '%';
-                    if (parseFloat(waterList[0].style.height) >= 100) {
-                        waterList[0].style.height = '100%';
-                        addPopo(waterList[0], true);
-                        window.clearInterval(waterList[0].waterTimer);
-                        waterList[1].waterTimer = window.setInterval(function () {
-                            let passW = parseFloat(waterList[1].style.width);
-                            waterList[1].style.width = passW + 1 + '%';
-                            if (parseFloat(waterList[1].style.width) >= 30 && parseFloat(waterList[1].style.width) < 60) {
-                                if (waterList[2].waterTimer) {
-                                    return;
-                                }
-                                waterList[2].waterTimer = window.setInterval(function () {
-                                    let abilityH = parseFloat(waterList[2].style.height);
-                                    waterList[2].style.height = abilityH + 1 + '%';
-                                    if (parseFloat(waterList[2].style.height) >= 70) {
-                                        waterList[2].style.height = '80%';
-                                        addPopo(waterList[2], true);
-                                        window.clearInterval(waterList[2].waterTimer);
-                                    }
-                                }, 17);
-                            } else if (parseFloat(waterList[1].style.width) >= 60 && parseFloat(waterList[1].style.width) < 90) {
-                                if (waterList[3].waterTimer) {
-                                    return;
-                                }
-                                waterList[3].waterTimer = window.setInterval(function () {
-                                    let abilityH = parseFloat(waterList[3].style.height);
-                                    waterList[3].style.height = abilityH + 1 + '%';
-                                    if (parseFloat(waterList[3].style.height) >= 60) {
-                                        waterList[3].style.height = '70%'
-                                        addPopo(waterList[3], true);
-                                        window.clearInterval(waterList[3].waterTimer);
-
-                                    }
-                                }, 17);
-                            } else if (parseFloat(waterList[1].style.width) >= 100) {
-                                waterList[1].style.width = '100%';
-                                addPopo(waterList[1], false);
-                                window.clearInterval(waterList[1].waterTimer);
-                                waterList[4].waterTimer = window.setInterval(function () {
-                                    let abilityH = parseFloat(waterList[4].style.height);
-                                    waterList[4].style.height = abilityH + 1 + '%';
-                                    if (parseFloat(waterList[4].style.height) >= 98) {
-                                        waterList[4].style.height = '98%';
-                                        addPopo(waterList[4], true);
-                                        window.clearInterval(waterList[4].waterTimer);
-
-                                        fireWorks.fireworkTimer = window.setTimeout(function () {
-                                            RENDERER.init();
-                                            fireWorks.style.top = '0%';
-                                            endingTextSpan[0].style.animationPlayState = 'running';
-                                                endingTextSpan[0].style.animationFillMode = 'forwards';
-
-                                            person.style.filter = 'grayscale(70%)';
-                                            level_3_ground.style.filter = 'grayscale(70%)';
-                                            audio[2].play();
-                                            window.clearTimeout(fireWorks.fireworkTimer);
-                                        }, 5000)
-
-                                    }
-                                }, 10);
-                            }
-                        }, 17)
-                    }
-                }, 17)
+                window.cancelAnimationFrame(abilityBox.opacityTimer);
+                waterList[0].waterTimer = window.requestAnimationFrame(abilityWateAction_2)
+                return;
             }
-        }, 20)
+            window.requestAnimationFrame(abilityWateAction_1)
+        }
+        abilityBox.opacityTimer = window.requestAnimationFrame(abilityWateAction_1)
     }
 
     function addPopo(waterBox, move) {
